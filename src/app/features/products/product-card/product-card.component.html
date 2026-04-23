@@ -3,8 +3,8 @@
     <h3>{{ product.productname }}</h3>
     <p class="description">{{ product.productdescription }}</p>
     <p class="price">${{ product.price | number:'1.2-2' }}</p>
-    <p class="stock" [class.low]="product.stock < 5">
-      Stock: {{ product.stock }}
+    <p class="stock" [class.low]="product.stock ?? 0 < 5">
+      Stock: {{ product.stock ?? 0 }}
     </p>
   </div>
   <div class="product-actions">

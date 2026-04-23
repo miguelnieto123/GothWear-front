@@ -27,7 +27,6 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     FormProductComponent,
     ListProductComponent,
-    ReactiveFormsModule,
     RegisterComponent,
     LoginComponent,
     UserListComponent,

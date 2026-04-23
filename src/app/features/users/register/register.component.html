@@ -7,31 +7,69 @@
     <div *ngIf="error" class="error-msg">{{ error }}</div>
     <div *ngIf="success" class="success-msg">{{ success }}</div>
 
-    <div class="form-group">
-      <label>Usuario</label>
-      <input type="text" [(ngModel)]="form.username" placeholder="Nombre de usuario" />
-    </div>
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" [(ngModel)]="form.email" placeholder="tu@correo.com" />
-    </div>
-    <div class="form-group">
-      <label>Contraseña</label>
-      <input type="password" [(ngModel)]="form.userpassword" placeholder="••••••••" />
-    </div>
-    <div class="form-group">
-      <label>Tipo de cuenta</label>
-      <select [(ngModel)]="form.id_rol">
-        <option [value]="2">Cliente</option>
-        <option [value]="1">Administrador</option>
-      </select>
-    </div>
+    <!-- ✅ FORM REACTIVO -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <button class="btn-primary full-width" (click)="onSubmit()" [disabled]="loading">
-      <span *ngIf="loading" class="spinner"></span>
-      {{ loading ? 'Registrando...' : 'Registrarse' }}
-    </button>
+      <div class="form-group">
+        <label>Usuario</label>
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="Nombre de usuario"
+        />
 
-    <p class="switch-link">¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a></p>
+        <small class="error-msg" *ngIf="form.get('username')?.touched && form.get('username')?.invalid">
+          El usuario es obligatorio (mínimo 3 caracteres)
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="tu@correo.com"
+        />
+
+        <small class="error-msg" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+          Email inválido
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input
+          type="password"
+          formControlName="userpassword"
+          placeholder="••••••••"
+        />
+
+        <small class="error-msg" *ngIf="form.get('userpassword')?.touched && form.get('userpassword')?.invalid">
+          Mínimo 6 caracteres
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Tipo de cuenta</label>
+        <select formControlName="id_rol">
+          <option [value]="2">Cliente</option>
+          <option [value]="1">Administrador</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary full-width"
+        [disabled]="loading || form.invalid"
+      >
+        <span *ngIf="loading" class="spinner"></span>
+        {{ loading ? 'Registrando...' : 'Registrarse' }}
+      </button>
+
+    </form>
+
+    <p class="switch-link">
+      ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
+    </p>
   </div>
 </div>

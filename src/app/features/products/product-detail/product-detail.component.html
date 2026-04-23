@@ -4,19 +4,50 @@
 
   <div *ngIf="product" class="detail-card">
     <button class="btn-back" routerLink="/products">← Volver</button>
+
     <h2>{{ product.productname }}</h2>
     <p class="description">{{ product.productdescription }}</p>
     <p class="price">${{ product.price | number:'1.2-2' }}</p>
     <p class="stock">Stock disponible: {{ product.stock }}</p>
 
-    <div class="quantity-selector">
-      <label>Cantidad:</label>
-      <input type="number" [(ngModel)]="quantity" [min]="1" [max]="product.stock" />
-    </div>
+    <!-- ✅ FORM REACTIVO -->
+    <form [formGroup]="form">
 
-    <div *ngIf="successMsg" class="success-msg">{{ successMsg }}</div>
-    <button class="btn-primary" (click)="addToCart()" [disabled]="product.stock === 0">
-      {{ product.stock === 0 ? 'Sin stock' : '🛒 Agregar al carrito' }}
-    </button>
+      <div class="quantity-selector">
+        <label>Cantidad:</label>
+
+        <input
+          type="number"
+          formControlName="quantity"
+          [min]="1"
+          [max]="product.stock ?? 0"
+        />
+
+        <!-- ✅ Validaciones -->
+        <small class="error-msg" *ngIf="form.get('quantity')?.touched && form.get('quantity')?.errors?.['required']">
+          La cantidad es obligatoria
+        </small>
+
+        <small class="error-msg" *ngIf="form.get('quantity')?.errors?.['min']">
+          Mínimo 1 unidad
+        </small>
+
+        <small class="error-msg" *ngIf="form.get('quantity')?.value > (product.stock ?? 0)">
+          No puedes superar el stock disponible
+        </small>
+      </div>
+
+      <div *ngIf="successMsg" class="success-msg">{{ successMsg }}</div>
+
+      <button
+        type="button"
+        class="btn-primary"
+        (click)="addToCart()"
+        [disabled]="product.stock === 0 || form.invalid"
+      >
+        {{ product.stock === 0 ? 'Sin stock' : '🛒 Agregar al carrito' }}
+      </button>
+
+    </form>
   </div>
 </div>

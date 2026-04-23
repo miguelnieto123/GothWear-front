@@ -20,7 +20,7 @@ export class CartService {
     if (existingItem) {
       existingItem.quantity += request.quantity;
     } else {
-      this.cart.items.push({ id_product: request.productId, price: 0, quantity: request.quantity });
+      this.cart.items.push({ id_product: request.productId, productname: '', price: 0, quantity: request.quantity });
     }
 
     return of({ message: 'Producto agregado al carrito' });
