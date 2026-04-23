@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  saveToken(token: any) {
+    throw new Error('Method not implemented.');
+  }
 
   private API = 'http://localhost:8080/auth';
 

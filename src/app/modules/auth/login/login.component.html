@@ -1,0 +1,30 @@
+<div class="auth-container">
+
+  <form [formGroup]="form" (ngSubmit)="login()" class="auth-card">
+
+    <h2>Iniciar Sesión</h2>
+
+    <!-- ERROR GLOBAL -->
+    <div class="backend-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <input type="email" formControlName="email" placeholder="Correo">
+
+    <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+      Correo inválido
+    </div>
+
+    <input type="password" formControlName="password" placeholder="Contraseña">
+
+    <div class="error" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+      Campo obligatorio
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">
+      Entrar
+    </button>
+
+  </form>
+
+</div>
