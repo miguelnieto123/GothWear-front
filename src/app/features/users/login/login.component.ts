@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'] // 👈 corrección (era styleUrl)
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
@@ -20,7 +20,7 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.minLength(4)]],
       userpassword: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
@@ -47,8 +47,8 @@ export class LoginComponent {
     });
   }
 
-  get email() {
-    return this.loginForm.get('email');
+  get username() {
+    return this.loginForm.get('username');
   }
 
   get password() {

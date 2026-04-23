@@ -39,15 +39,22 @@ export class RegisterComponent implements OnInit {
     const formValue = this.form.value;
 
     this.authService.register(formValue).subscribe({
-      next: (res: { message: string }) => {
-        this.loading = false;
-        this.success = res.message;
-        setTimeout(() => this.router.navigate(['/login']), 1500);
-      },
-      error: () => {
-        this.loading = false;
-        this.error = 'Error al registrarse. Intenta de nuevo.';
-      }
+      next: (res: any) => {
+  console.log('RESPUESTA BACKEND:', res);
+
+  this.loading = false;
+  this.success = res.message;
+
+  setTimeout(() => {
+    console.log('NAVEGANDO A LOGIN...');
+    this.router.navigate(['/login']);
+  }, 1500);
+},
+error: (err) => {
+  console.error('ERROR:', err);
+  this.loading = false;
+  this.error = 'Error al registrarse. Intenta de nuevo.';
+}
     });
   }
 }
