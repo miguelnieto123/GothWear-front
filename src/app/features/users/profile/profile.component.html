@@ -8,7 +8,7 @@
   </div>
 
   <div class="orders-section">
-    <h3>📦 Mis Órdenes</h3>
+    <h3>Mis Órdenes</h3>
     <div *ngIf="loading">Cargando órdenes...</div>
     <div *ngIf="error" class="error-msg">{{ error }}</div>
     <div *ngIf="!loading && orders.length === 0" class="empty-msg">No tienes órdenes aún.</div>

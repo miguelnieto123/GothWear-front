@@ -11,9 +11,6 @@ import { UserListComponent } from './features/users/user-list/user-list.componen
 import { ProfileComponent } from './features/users/profile/profile.component';
 import { CartComponent } from './features/cart/cart/cart.component';
 import { CartItemComponent } from './features/cart/cart-item/cart-item.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { HomeComponent } from './layout/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './features/products/product-detail/product-detail.component';
 import { ProductCardComponent } from './features/products/product-card/product-card.component';
@@ -33,9 +30,6 @@ import { HttpClientModule } from '@angular/common/http';
     ProfileComponent,
     CartComponent,
     CartItemComponent,
-    NavbarComponent,
-    FooterComponent,
-    HomeComponent,
     ProductDetailComponent,
     ProductCardComponent,
     OrderSummaryComponent,

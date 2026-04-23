@@ -53,7 +53,6 @@ export class ListProductComponent implements OnInit {
     });
   }
 
-  // ✅ ESTE ES EL MÉTODO QUE TE FALTABA
   trackByProductId(index: number, product: Product): number {
     return product.id_product;
   }
