@@ -23,11 +23,9 @@
   </div>
 
   <button type="submit" [disabled]="loading">
-    {{ loading ? 'Ingresando...' : 'Login' }}
+    {{ loading ? 'Iniciando sesión...' : 'Iniciar sesión' }}
   </button>
 
-  <div *ngIf="error">
-    {{ error }}
-  </div>
+
 
 </form>

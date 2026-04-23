@@ -10,9 +10,11 @@ export interface Cart {
 }
 
 export interface Order {
-  id: number;
+  id_order: number;
+  orderdate: Date;
   items: CartItem[];
+  amount: number;
   total: number;
-  status?: string;
-  createdAt?: string;
+  status: string;
+  createdAt: Date;
 }

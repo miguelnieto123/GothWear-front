@@ -47,7 +47,6 @@ export class LoginComponent {
     });
   }
 
-  // 👇 getters para el HTML (mejor práctica)
   get email() {
     return this.loginForm.get('email');
   }

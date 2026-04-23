@@ -1,22 +1,50 @@
-<div class="product-card">
-  <div class="product-body">
-    <h3>{{ product.productname }}</h3>
-    <p class="description">{{ product.productdescription }}</p>
-    <p class="price">${{ product.price | number:'1.2-2' }}</p>
-    <p class="stock" [class.low]="product.stock ?? 0 < 5">
-      Stock: {{ product.stock ?? 0 }}
-    </p>
+<div class="product-card" *ngIf="product">
+
+  <h3>{{ product.productname }}</h3>
+
+  <p class="description">
+    {{ product.productdescription }}
+  </p>
+
+  <p class="price">
+    ${{ product.price | number:'1.2-2' }}
+  </p>
+
+  <p class="stock">
+    Stock: {{ product.stock }}
+  </p>
+
+  <!-- Mensajes -->
+  <div *ngIf="addedMsg" class="success-msg">
+    {{ addedMsg }}
   </div>
-  <div class="product-actions">
-    <a [routerLink]="['/products', product.id_product]" class="btn-secondary">Ver detalles</a>
-    <button *ngIf="!isAdmin" class="btn-primary" (click)="addToCart()" [disabled]="product.stock === 0">
+
+  <div *ngIf="error" class="error-msg">
+    {{ error }}
+  </div>
+
+  <!-- Acciones -->
+  <div class="actions">
+
+    <!-- Cliente -->
+    <button
+      *ngIf="!isAdmin"
+      class="btn-primary"
+      (click)="addToCart()"
+      [disabled]="product.stock === 0"
+    >
       {{ product.stock === 0 ? 'Sin stock' : '🛒 Agregar' }}
     </button>
-    <div *ngIf="isAdmin" class="admin-actions">
-      <a [routerLink]="['/products/edit', product.id_product]" class="btn-edit">Editar</a>
-      <button class="btn-delete" (click)="delete()">Eliminar</button>
-    </div>
-    <span *ngIf="addedMsg" class="success-inline">{{ addedMsg }}</span>
-    <span *ngIf="error" class="error-inline">{{ error }}</span>
+
+    <!-- Admin -->
+    <button
+      *ngIf="isAdmin"
+      class="btn-danger"
+      (click)="delete()"
+    >
+      🗑 Eliminar
+    </button>
+
   </div>
+
 </div>
