@@ -1,0 +1,9 @@
+<div class="cart-item">
+  <div class="item-info">
+    <h4>{{ item.productname }}</h4>
+    <p>Cantidad: {{ item.quantity }}</p>
+    <p>Precio unit.: ${{ item.price | number:'1.2-2' }}</p>
+    <p><strong>Subtotal: ${{ (item.price * item.quantity) | number:'1.2-2' }}</strong></p>
+  </div>
+  <button class="btn-delete" (click)="remove()">🗑️ Eliminar</button>
+</div>

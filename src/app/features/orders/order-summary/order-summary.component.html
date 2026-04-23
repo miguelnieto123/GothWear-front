@@ -1,0 +1,18 @@
+<div class="summary-container">
+  <h2>📋 {{ isAdmin ? 'Todas las Órdenes' : 'Mis Órdenes' }}</h2>
+  <div *ngIf="loading">Cargando órdenes...</div>
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+  <div *ngIf="!loading && orders.length === 0" class="empty-msg">No hay órdenes registradas.</div>
+
+  <div class="order-card" *ngFor="let order of orders">
+    <div class="order-header">
+      <strong>Orden #{{ order.id_order }}</strong>
+      <span class="badge" [class.active]="order.status">
+        {{ order.status ? 'Completada' : 'Pendiente' }}
+      </span>
+    </div>
+    <p>📅 {{ order.orderdate | date:'medium' }}</p>
+    <p>🛍️ Cantidad: {{ order.amount }}</p>
+    <p>💰 Total: ${{ order.total | number:'1.2-2' }}</p>
+  </div>
+</div>

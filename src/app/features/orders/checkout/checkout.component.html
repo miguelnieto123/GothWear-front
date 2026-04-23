@@ -1,0 +1,23 @@
+<div class="checkout-container">
+  <h2>✅ Confirmar Compra</h2>
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+
+  <div *ngIf="cart && cart.items">
+    <div class="checkout-items">
+      <div class="checkout-row" *ngFor="let item of cart.items">
+        <span>{{ item.productname }} x{{ item.quantity }}</span>
+        <span>${{ (item.price * item.quantity) | number:'1.2-2' }}</span>
+      </div>
+    </div>
+    <div class="checkout-total">
+      <strong>Total a pagar: ${{ total | number:'1.2-2' }}</strong>
+    </div>
+    <div class="checkout-actions">
+      <button class="btn-secondary" routerLink="/cart">← Volver al carrito</button>
+      <button class="btn-primary" (click)="confirmPurchase()" [disabled]="processing">
+        {{ processing ? 'Procesando...' : '💳 Pagar ahora' }}
+      </button>
+    </div>
+  </div>
+</div>

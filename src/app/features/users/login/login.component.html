@@ -1,0 +1,33 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <input
+    type="email"
+    formControlName="email"
+    placeholder="Correo"
+  />
+
+  <div *ngIf="email?.touched && email?.invalid">
+    <small *ngIf="email?.errors?.['required']">El correo es obligatorio</small>
+    <small *ngIf="email?.errors?.['email']">Formato de correo inválido</small>
+  </div>
+
+  <input
+    type="password"
+    formControlName="userpassword"
+    placeholder="Contraseña"
+  />
+
+  <div *ngIf="password?.touched && password?.invalid">
+    <small *ngIf="password?.errors?.['required']">La contraseña es obligatoria</small>
+    <small *ngIf="password?.errors?.['minlength']">Mínimo 4 caracteres</small>
+  </div>
+
+  <button type="submit" [disabled]="loading">
+    {{ loading ? 'Ingresando...' : 'Login' }}
+  </button>
+
+  <div *ngIf="error">
+    {{ error }}
+  </div>
+
+</form>

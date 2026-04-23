@@ -1,0 +1,21 @@
+<div class="list-container">
+  <div class="list-header">
+    <h2>🛍️ Productos</h2>
+    <a *ngIf="isAdmin" routerLink="/products/new" class="btn-primary">+ Nuevo Producto</a>
+  </div>
+
+  <div *ngIf="loading">Cargando productos...</div>
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+  <div *ngIf="successMsg" class="success-msg">{{ successMsg }}</div>
+
+  <div *ngIf="!loading && products.length === 0" class="empty-msg">No hay productos disponibles.</div>
+
+  <div class="products-grid">
+    <app-product-card
+      *ngFor="let product of products"
+      [product]="product"
+      [isAdmin]="isAdmin"
+      (onDelete)="deleteProduct($event)">
+    </app-product-card>
+  </div>
+</div>

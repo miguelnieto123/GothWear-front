@@ -1,0 +1,27 @@
+<div class="cart-container">
+  <h2>🛒 Mi Carrito</h2>
+  <div *ngIf="loading">Cargando carrito...</div>
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+  <div *ngIf="successMsg" class="success-msg">{{ successMsg }}</div>
+
+  <div *ngIf="!loading && (!cart || !cart.items || cart.items.length === 0)" class="empty-msg">
+    Tu carrito está vacío. <a routerLink="/products">Ver productos</a>
+  </div>
+
+  <div *ngIf="cart && cart.items && cart.items.length > 0">
+    <app-cart-item
+      *ngFor="let item of cart.items"
+      [item]="item"
+      (onRemove)="removeItem($event)">
+    </app-cart-item>
+
+    <div class="cart-footer">
+      <div class="total">
+        <strong>Total: ${{ total | number:'1.2-2' }}</strong>
+      </div>
+      <button class="btn-primary" (click)="checkout()" [disabled]="checkingOut">
+        {{ checkingOut ? 'Procesando...' : '✅ Confirmar compra' }}
+      </button>
+    </div>
+  </div>
+</div>

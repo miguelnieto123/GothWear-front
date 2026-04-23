@@ -1,0 +1,22 @@
+<div class="detail-container">
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="error" class="error-msg">{{ error }}</div>
+
+  <div *ngIf="product" class="detail-card">
+    <button class="btn-back" routerLink="/products">← Volver</button>
+    <h2>{{ product.productname }}</h2>
+    <p class="description">{{ product.productdescription }}</p>
+    <p class="price">${{ product.price | number:'1.2-2' }}</p>
+    <p class="stock">Stock disponible: {{ product.stock }}</p>
+
+    <div class="quantity-selector">
+      <label>Cantidad:</label>
+      <input type="number" [(ngModel)]="quantity" [min]="1" [max]="product.stock" />
+    </div>
+
+    <div *ngIf="successMsg" class="success-msg">{{ successMsg }}</div>
+    <button class="btn-primary" (click)="addToCart()" [disabled]="product.stock === 0">
+      {{ product.stock === 0 ? 'Sin stock' : '🛒 Agregar al carrito' }}
+    </button>
+  </div>
+</div>

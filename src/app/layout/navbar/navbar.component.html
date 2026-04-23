@@ -1,0 +1,52 @@
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" routerLink="/">
+      <span class="brand-skull">✦</span>
+      <span class="brand-name">GOTHWEAR</span>
+    </a>
+
+    <ul class="navbar-links">
+      <li><a routerLink="/products" routerLinkActive="active">Colección</a></li>
+      <li *ngIf="isLoggedIn && !isAdmin">
+        <a routerLink="/cart" routerLinkActive="active" class="cart-link">
+          <span>Carrito</span>
+          <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+        </a>
+      </li>
+      <li *ngIf="isLoggedIn && !isAdmin">
+        <a routerLink="/orders/summary" routerLinkActive="active">Mis Órdenes</a>
+      </li>
+      <li *ngIf="isAdmin">
+        <a routerLink="/products/new" routerLinkActive="active">+ Producto</a>
+      </li>
+      <li *ngIf="isAdmin">
+        <a routerLink="/orders/summary" routerLinkActive="active">Órdenes</a>
+      </li>
+    </ul>
+
+    <div class="navbar-auth">
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login" class="btn-ghost-nav">Iniciar Sesión</a>
+        <a routerLink="/register" class="btn-accent-nav">Registrarse</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <span class="user-greeting">{{ username }}</span>
+        <button class="btn-ghost-nav" (click)="logout()">Salir</button>
+      </ng-container>
+    </div>
+
+    <button class="hamburger" (click)="menuOpen = !menuOpen" [class.open]="menuOpen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" [class.open]="menuOpen" (click)="menuOpen = false">
+    <a routerLink="/products">Colección</a>
+    <a routerLink="/cart" *ngIf="isLoggedIn && !isAdmin">Carrito</a>
+    <a routerLink="/orders/summary" *ngIf="isLoggedIn">Mis Órdenes</a>
+    <a routerLink="/login" *ngIf="!isLoggedIn">Iniciar Sesión</a>
+    <a routerLink="/register" *ngIf="!isLoggedIn">Registrarse</a>
+    <a *ngIf="isLoggedIn" (click)="logout()">Salir</a>
+  </div>
+</nav>

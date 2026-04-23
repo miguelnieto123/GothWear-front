@@ -1,0 +1,22 @@
+<div class="product-card">
+  <div class="product-body">
+    <h3>{{ product.productname }}</h3>
+    <p class="description">{{ product.productdescription }}</p>
+    <p class="price">${{ product.price | number:'1.2-2' }}</p>
+    <p class="stock" [class.low]="product.stock < 5">
+      Stock: {{ product.stock }}
+    </p>
+  </div>
+  <div class="product-actions">
+    <a [routerLink]="['/products', product.id_product]" class="btn-secondary">Ver detalles</a>
+    <button *ngIf="!isAdmin" class="btn-primary" (click)="addToCart()" [disabled]="product.stock === 0">
+      {{ product.stock === 0 ? 'Sin stock' : '🛒 Agregar' }}
+    </button>
+    <div *ngIf="isAdmin" class="admin-actions">
+      <a [routerLink]="['/products/edit', product.id_product]" class="btn-edit">Editar</a>
+      <button class="btn-delete" (click)="delete()">Eliminar</button>
+    </div>
+    <span *ngIf="addedMsg" class="success-inline">{{ addedMsg }}</span>
+    <span *ngIf="error" class="error-inline">{{ error }}</span>
+  </div>
+</div>
